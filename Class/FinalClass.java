@@ -1,3 +1,47 @@
+/*
+ * ============================================================================
+ *  FINAL CLASS
+ * ============================================================================
+ *
+ * WHAT IT IS
+ *   A class that CANNOT be extended. Writing "class X extends FinalClass"
+ *   is a compile error. The class itself works normally: it can extend one
+ *   class, implement interfaces, and be instantiated.
+ *
+ * REAL EXAMPLES IN THE JDK
+ *   String, Integer, Long, Double, Math, and System are all final.
+ *
+ * EFFECT ON METHODS
+ *   Every method of a final class is effectively final too, because no
+ *   subclass can exist to override it. You do not need to write "final" on
+ *   each method.
+ *
+ * WHY MAKE A CLASS FINAL
+ *   1. Immutability and safety: nobody can subclass it and change its behaviour
+ *      (this is why String is final; a malicious subclass could break security).
+ *   2. Design intent: the class was not designed for inheritance.
+ *   3. Predictability: callers know the exact behaviour of the type.
+ *
+ * MODIFIER RULES
+ *   final + abstract       ILLEGAL (abstract needs subclasses)
+ *   final + sealed         ILLEGAL (sealed needs permitted subclasses)
+ *   final + non-sealed     ILLEGAL
+ *   final + static         legal for a nested class
+ *   Access modifiers work as usual (protected/private only when nested).
+ *
+ * "final" ON OTHER THINGS (do not confuse them)
+ *   final class   -> cannot be extended
+ *   final method  -> cannot be overridden
+ *   final field / variable -> can be assigned only once
+ *
+ * ALREADY IMPLICITLY FINAL
+ *   Records are always final. Enums are final unless a constant has a body.
+ *
+ * WHAT THIS FILE DEMONSTRATES
+ *   final classes at every access level, and a final class that extends a
+ *   normal class and implements an interface. The illegal cases are commented out.
+ * ============================================================================
+ */
 // Run: java FinalClass.java   (Java 17+)
 public class FinalClass {
 

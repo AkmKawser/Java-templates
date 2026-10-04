@@ -1,3 +1,48 @@
+/*
+ * ============================================================================
+ *  RECORD CLASS  (Java 16+)
+ * ============================================================================
+ *
+ * WHAT IT IS
+ *   A compact class made to carry immutable data. You list the components in
+ *   the header, and the compiler writes the rest:
+ *       record Point(int x, int y) { }
+ *   generates, for you:
+ *     - a private final field for each component
+ *     - a constructor taking all components (the canonical constructor)
+ *     - an accessor for each component: p.x(), p.y()  (no "get" prefix)
+ *     - equals(), hashCode(), and toString()  ->  Point[x=1, y=2]
+ *
+ * HOW IT WORKS
+ *   - Implicitly extends java.lang.Record, so you can NOT write "extends".
+ *   - Implicitly final: nobody can extend a record, and it cannot be abstract.
+ *   - Fields are final, so a record is shallowly immutable.
+ *   - It cannot declare extra INSTANCE fields beyond the components.
+ *   - It CAN have: static fields and methods, extra constructors, normal
+ *     methods, a compact constructor for validation, and nested types.
+ *   - It CAN implement interfaces (see Student).
+ *
+ * MODIFIERS
+ *   public / package-private at top level; all four when nested.
+ *   "final" is allowed but redundant. abstract, sealed, non-sealed are NOT allowed.
+ *   static is implicit when nested.
+ *
+ * RECORDS AND SEALED TYPES
+ *   A record cannot be sealed, but it is a perfect permitted subclass of a
+ *   sealed interface, because it is already final (see Shape and Circle).
+ *
+ * WHERE DECLARED
+ *   Top-level, as a member, or local inside a method.
+ *
+ * RECORD vs NORMAL CLASS
+ *   Use a record when the class is "just its data" (a DTO, a coordinate, a
+ *   result). Use a normal class when you need mutable state or inheritance.
+ *
+ * WHAT THIS FILE DEMONSTRATES
+ *   Top-level and nested records, a redundant final, a record in a sealed
+ *   hierarchy, a record implementing interfaces, and a local record.
+ * ============================================================================
+ */
 // Run: java RecordClass.java   (Java 17+)
 public class RecordClass {
     protected record A(int v) { }            // PROTECTED (nested only), implicitly static

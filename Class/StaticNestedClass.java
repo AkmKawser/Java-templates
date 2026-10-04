@@ -1,3 +1,47 @@
+/*
+ * ============================================================================
+ *  STATIC NESTED CLASS
+ * ============================================================================
+ *
+ * WHAT IT IS
+ *   A class declared INSIDE another class with the "static" keyword. It is a
+ *   normal class that happens to live in the outer class's namespace. It is
+ *   NESTED but not INNER, because it has no link to an outer object.
+ *
+ * KEY IDEA: NO OUTER INSTANCE
+ *   You create it without any outer object:
+ *       new Outer.Nested();
+ *   It holds no hidden reference to an Outer object, so:
+ *   - it can directly use the outer's STATIC members, including private ones;
+ *   - it cannot directly use the outer's INSTANCE members. It would need an
+ *     Outer object passed in (see class I below).
+ *   - the outer class CAN access the nested class's private members.
+ *
+ * ACCESS MODIFIERS
+ *   All four are allowed: public, protected, package-private, private.
+ *   private static is common for helper classes that nobody else should see.
+ *
+ * OTHER MODIFIERS
+ *   abstract, final, sealed, non-sealed are all allowed.
+ *   It may declare static members of its own.
+ *
+ * COMMON USES
+ *   - Builder pattern: Pizza.Builder
+ *   - Grouping a helper with the class that owns it: Map.Entry
+ *   - Keeping a small private data holder out of the public API
+ *
+ * HOW THE COMPILER SEES IT
+ *   It becomes a separate file named Outer$Nested.class.
+ *
+ * STATIC NESTED vs INNER
+ *   static nested  -> no outer object, created with new Outer.Nested()
+ *   inner          -> needs an outer object, created with outer.new Inner()
+ *
+ * WHAT THIS FILE DEMONSTRATES
+ *   Static nested classes at all four access levels, abstract, final, sealed,
+ *   and implements, plus how to reach the outer's members correctly.
+ * ============================================================================
+ */
 // Run: java StaticNestedClass.java   (Java 17+)
 public class StaticNestedClass {
     private int x = 10;

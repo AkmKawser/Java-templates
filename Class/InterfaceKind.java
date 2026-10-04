@@ -1,3 +1,52 @@
+/*
+ * ============================================================================
+ *  INTERFACE  (a type, not a class, but it acts like one)
+ * ============================================================================
+ *
+ * WHAT IT IS
+ *   A CONTRACT: it says what a type can do without saying how. A class that
+ *   "implements" the interface promises to provide every abstract method.
+ *   Interfaces are how Java gets multiple inheritance of TYPE.
+ *
+ * WHAT IT CAN CONTAIN (and the implicit modifiers)
+ *   - fields:             implicitly public static final (constants only)
+ *   - abstract methods:   implicitly public abstract
+ *   - default methods:    a method WITH a body that implementers inherit
+ *   - static methods:     utility methods called as Interface.method()
+ *   - private methods:    helpers shared by default methods (Java 9+)
+ *   - nested types
+ *   It has NO constructors and NO instance fields.
+ *
+ * CLAUSES
+ *   extends   MANY interfaces:  interface C extends A, B { }
+ *   implements is NOT allowed on an interface. Classes implement interfaces.
+ *   A class can implement many interfaces:  class X implements A, B { }
+ *
+ * MODIFIERS
+ *   public / package-private at top level; all four when nested.
+ *   abstract  allowed but redundant (every interface is already abstract)
+ *   final     NOT allowed (an interface exists to be implemented)
+ *   sealed / non-sealed allowed, to limit who can implement it
+ *   static    implicit when nested, never written
+ *
+ * FUNCTIONAL INTERFACE
+ *   An interface with exactly ONE abstract method can be written as a lambda
+ *   (see Drawable and Greeter in this file's main method).
+ *
+ * DEFAULT METHOD CONFLICT
+ *   If a class implements two interfaces with the same default method, it must
+ *   override it itself and may pick one with  A.super.method().
+ *
+ * INTERFACE vs ABSTRACT CLASS
+ *   Interface: many per class, no state, no constructors, pure contract.
+ *   Abstract class: one per class, can hold state and constructors.
+ *
+ * WHAT THIS FILE DEMONSTRATES
+ *   Interfaces at every access level, abstract (redundant), sealed with
+ *   final/non-sealed implementers, extending many interfaces, and the four
+ *   kinds of members (abstract, default, static, constant).
+ * ============================================================================
+ */
 // Run: java InterfaceKind.java   (Java 17+)
 public class InterfaceKind {
     protected interface PA { String hi(); }             // PROTECTED (nested only), implicitly static

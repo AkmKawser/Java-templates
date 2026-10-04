@@ -1,3 +1,51 @@
+/*
+ * ============================================================================
+ *  SUPER CLASS  (a ROLE, not a separate kind of class)
+ * ============================================================================
+ *
+ * WHAT IT IS
+ *   "Super class" describes a RELATIONSHIP: it is any class that another class
+ *   extends. Animal is the super class of Dog when Dog extends Animal. The same
+ *   class can be a super class, a sub class, or both. Also called parent or
+ *   base class.
+ *
+ * THE ROOT
+ *   Every class has a super class. If you write no "extends", it is
+ *   java.lang.Object. Object itself is the only class with no super class.
+ *
+ * WHAT A SUB CLASS RECEIVES
+ *   public          inherited, usable everywhere
+ *   protected       inherited, usable in the subclass (even in another package)
+ *   package-private inherited ONLY if the subclass is in the same package
+ *   private         NOT accessible. The data still exists inside the object,
+ *                   but the subclass must use a getter (see getSecret()).
+ *   Constructors are NEVER inherited. A subclass calls them with super(...).
+ *
+ * WHICH CLASSES CAN BE A SUPER CLASS
+ *   normal / abstract class   yes
+ *   sealed class              yes, but only its permitted classes can extend it
+ *   final class               NO
+ *   record                    NO (implicitly final)
+ *   enum                      NO
+ *
+ * WHY IT MATTERS: POLYMORPHISM
+ *   A super class reference can hold any sub class object:
+ *       Animal a = new Dog();
+ *   Calling an overridden method runs the Dog version at runtime.
+ *
+ * MULTI-LEVEL INHERITANCE
+ *   LivingThing > Mammal > Dog. Mammal is a sub class of LivingThing and a
+ *   super class of Dog at the same time. Java does not allow two parents.
+ *
+ * DESIGN TIP
+ *   Make a class a super class on purpose. If it is not designed for
+ *   extension, mark it final.
+ *
+ * WHAT THIS FILE DEMONSTRATES
+ *   protected vs private fields, an abstract super class, a sealed super class,
+ *   multi-level inheritance, and a nested super class.
+ * ============================================================================
+ */
 // Run: java SuperClass.java   (Java 17+)
 public class SuperClass {
     static class Base { String hi() { return "Base"; } }                    // nested super class
